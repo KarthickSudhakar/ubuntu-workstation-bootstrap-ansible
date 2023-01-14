@@ -1,0 +1,8 @@
+---
+# Git related tools
+
+- name: GIT - sublimemerge
+  ansible.builtin.apt:
+    pkg: "sublime-merge"
+    state: present
+  ignore_errors: true

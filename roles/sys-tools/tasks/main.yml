@@ -1,0 +1,28 @@
+---
+# Task to install system related tools
+
+- name: SYSTEM RELATED TOOLS
+  ansible.builtin.apt:
+    pkg:
+      - jq
+      - curl
+      - wget
+      - htop
+      - cowsay
+      - rsync
+      - grsync
+      - neofetch
+      - tree
+      - hardinfo
+      - stacer
+      - gparted
+      - copyq
+      - gnome-tweaks
+      - ufw
+      - gufw
+      - timeshift
+      - qbittorrent
+      - dconf-editor
+      - xclip
+    state: present
+  ignore_errors: true

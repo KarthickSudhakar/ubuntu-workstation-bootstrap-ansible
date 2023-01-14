@@ -1,0 +1,66 @@
+---
+# Playbook to install docker community edition and docker compose in ubuntu based distribution
+
+- name: Install Docker Dependent Packages
+  ansible.builtin.apt:
+    pkg:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: True
+
+- name: Docker official GPG Key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu {{ udist }} stable
+    state: present
+
+- name: Install Docker & Docker Compose
+  ansible.builtin.apt:
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+    state: present
+    update_cache: True
+
+- name: Check if docker group is present
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ duser }}"
+    groups: docker
+    append: yes
+  notify: Docker Service
+
+- name: Install Python SDK for docker
+  ansible.builtin.shell: python3 -m pip install docker
+
+- name: Get Python SDK version for Docker and PyYAML version
+  ansible.builtin.shell: python3 -m pip list | grep -i -E "Docker|PyYAML"
+  register: sdkversion
+
+- name: Check Docker Version
+  ansible.builtin.shell: docker --version
+  register: dversion
+
+- name: Check Docker Compose Version
+  ansible.builtin.shell: docker compose version
+  register: dcversion
+
+- name: Print Docker Compose Version
+  ansible.builtin.debug:
+    msg:
+      - "Docker version :: {{ dversion.stdout_lines }}"
+      - "Docker compose version :: {{ dcversion.stdout_lines }}"
+      - "Docker PY SDK Version :: {{ sdkversion.stdout_lines }}"

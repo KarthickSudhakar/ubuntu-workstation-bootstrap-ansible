@@ -1,0 +1,23 @@
+---
+# Screenshot & Editing tools
+# GIMP & DARKTABLE - Editing
+# FLAMESHOT & KSNIP - SCREENSHOT
+# PEEK - GIF
+# VLC - MEDIA PLAYER
+
+# Install package
+- name: MEDIA - Gimp, Darktable, flameshot, peek
+  ansible.builtin.apt:
+    pkg:
+      - "gimp"
+      - "darktable"
+      - "flameshot"
+      - "peek"
+      - "vlc"
+    state: present
+  ignore_errors: true
+
+- name: MEDIA - Install ksnip through flatpak
+  ansible.builtin.shell: |
+    flatpak install -y flathub org.ksnip.ksnip
+  ignore_errors: True

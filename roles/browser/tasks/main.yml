@@ -1,0 +1,38 @@
+---
+# Install Brave and Chrome Browser
+
+- name: BRAVE BROWSER - Get keyring file
+  ansible.builtin.get_url:
+    url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+    dest: "/usr/share/keyrings/brave-browser-archive-keyring.gpg"
+    mode: "0644"
+  become: True
+  ignore_errors: True
+
+- name: BRAVE BROWSER - Add repository
+  become: True
+  ansible.builtin.copy:
+    dest: /etc/apt/sources.list.d/brave-browser-release.list
+    content: |
+      deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main
+  ignore_errors: True
+
+# Install brave-browser
+- name: BRAVE BROWSER - Update & Install
+  ansible.builtin.apt:
+    pkg: brave-browser
+    state: present
+    update_cache: True
+
+# Google chrome
+
+- name: CHROME BROWSER - download .deb file
+  ansible.builtin.get_url:
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    dest: /tmp/chrome.deb
+  ignore_errors: True
+
+- name: CHROME BROWSER - Install from /tmp/chrome.deb
+  ansible.builtin.apt:
+    deb: /tmp/chrome.deb
+  ignore_errors: True

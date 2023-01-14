@@ -1,0 +1,27 @@
+---
+# Main playbook which will bootstrap ubuntu based distribution. All the tasks are in roles/ directory
+- name: Bootstrap Ubuntu Based Workstations
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  vars_prompt:
+
+    - name: udist
+      prompt: Repos will be enabled for JAMMY, to change it enter here
+      private: False
+      default: "jammy"
+
+    - name: duser
+      prompt: Choose user other than the super user for task to run
+      private: False
+
+  roles:
+    - repo
+    - docker
+    - browser
+    - text_editors
+    - git
+    - media
+    - sys-tools
+    - terminal

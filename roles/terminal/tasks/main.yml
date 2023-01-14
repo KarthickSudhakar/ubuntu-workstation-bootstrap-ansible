@@ -1,0 +1,11 @@
+---
+# Kitty, tmux, fish - Terminal tools installation
+
+- name: TERMINAL - Kitty, Tmux, Fish
+  ansible.builtin.apt:
+    pkg:
+      - kitty
+      - tmux
+      - fish
+    state: present
+  ignore_errors: True

@@ -1,0 +1,32 @@
+# Enable all ubuntu repositories
+- name: PRE STEP - Enable additional repositories universe, multiverse, restricted
+  ansible.builtin.apt_repository:
+    repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ udist }} {{ item }}"
+    state: present
+  loop:
+    - universe
+    - multiverse
+    - restricted
+
+# Updating the repo
+- name: PRE STEP - Update apt cache
+  ansible.builtin.apt:
+    update_cache: True
+    upgrade: True
+
+# Updating all the packages to latest release
+- name: PRE STEP - Update all packages to latest release
+  ansible.builtin.apt:
+    upgrade: True
+
+# Enable flatpack
+- name: PRE STEP - Install flatpak
+  ansible.builtin.apt:
+    pkg: flatpak
+  register: flatpak
+
+# Add flahub repository
+- name: PRE STEP - Add flathub repository
+  ansible.builtin.shell:
+    cmd: flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  when: flatpak.failed != 'false'
