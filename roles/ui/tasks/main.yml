@@ -1,0 +1,26 @@
+---
+# Install Numix, Yaru - Icon and Shell Pack
+- name: Install Numix Theme
+  ansible.builtin.apt:
+    pkg: 
+      - numix-gtk-theme
+      - numix-icon-theme
+      - numix-icon-theme-circle
+    state: present
+
+- name: Install Yaru Shell & Icon Pack
+  ansible.builtin.apt: 
+    pkg:
+      - yaru-theme-gnome-shell
+      - yaru-theme-gtk
+      - yaru-theme-icon
+    state: present
+
+# Install Fonts
+
+- name: Install fonts-firacode, fonts-hack
+  ansible.builtin.apt:
+    pkg:
+      - fonts-firacode
+      - fonts-hack
+    state: present
