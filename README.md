@@ -16,12 +16,21 @@ roles
 └── text_editors
 ```
 
-Download and run the playbook with following commands.
+You have two options.
+
+1. You can clone the repo and directly run the playbook named `bootstrap.yml` file. 
+2. Run the script/install_ansible.sh which will setup python virtual environment, install ansible and run the playbook automatically.
 
 ```sh
+# option 1
 $ git clone https://github.com/KarthickSudhakar/ubuntu-workstation-bootstrap-ansible.git
 $ cd ubuntu-workstation-bootstrap-ansible
-$ ansible-playbook -K -b bootstrap.yml
+$ ansible-playbook bootstrap.yml
+
+# option2
+$ git clone https://github.com/KarthickSudhakar/ubuntu-workstation-bootstrap-ansible.git
+$ cd ubuntu-workstation-bootstrap-ansible/script
+$ bash install_ansible.sh
 ```
 
 When you run the playbook 

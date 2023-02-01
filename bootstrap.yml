@@ -1,8 +1,7 @@
 ---
 # Main playbook which will bootstrap ubuntu based distribution. All the tasks are in roles/ directory
 - name: Bootstrap Ubuntu Based Workstations
-  hosts: localhost
-  connection: local
+  hosts: all
   gather_facts: False
 
   vars_prompt:
