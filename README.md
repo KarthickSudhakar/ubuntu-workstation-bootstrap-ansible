@@ -54,5 +54,7 @@ Following tools will be installed when you run the playbook
 |Sys Tools| roles/sys-tools| Jq, Curl, Wget, Htop, Cowsay, Rsync, Grsync, Neofetch, Tree, Stacer, Gparted,Copyq, Gnome-Tweaks, Ufw, Gufw, Timeshift, Qbittorrent, Docnf-Editor, Xclip|
 |Terminal| roles/terminal/ | Kitty, Fish, Tmux |
 |ui | roles/ui/ | Icon - Numix & Yaru , Fonts - FiraCode & Hack |
+|Virtualization| roles/virtualization | KVM |
+|vagrant| roles/vagrant | Vagrant & Libvirt plugin |
 
 

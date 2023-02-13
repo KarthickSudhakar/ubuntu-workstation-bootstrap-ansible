@@ -75,7 +75,7 @@ echo -e "\n
 "
 read -p "==> PRESS [Y|y] TO START THE PLAYBOOK 'bootstrap.yml' :: " USER_RESPONSE
 if [[ ${USER_RESPONSE} = [Yy] ]]; then
-    ${PY_VENV_DIR}/bin/ansible-playbook ../bootstrap.yml -K -b -i ../hosts
+    ANSIBLE_COW_SELECTION=tux ${PY_VENV_DIR}/bin/ansible-playbook ../bootstrap.yml -K -b -i ../hosts
 else
     echo "==> EXIT SCRIPT ...."
 fi

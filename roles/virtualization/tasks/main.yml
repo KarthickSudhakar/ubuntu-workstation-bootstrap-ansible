@@ -1,0 +1,13 @@
+# Install KVM
+
+# KVM and Virt manager
+- name: Install KVM & Virt Manager
+  ansible.builtin.apt:
+    pkg:
+      - qemu-kvm 
+      - libvirt-clients 
+      - libvirt-daemon-system 
+      - bridge-utils
+      - virt-manager
+  ignore_errors: True
+
